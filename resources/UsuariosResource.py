@@ -1,5 +1,7 @@
 from flask_restful import Resource, reqparse
 
+from models import Usuario
+
 usuarios = [{'nome': 'João'}, {'nome': 'Maria'}]
 
 
@@ -13,6 +15,7 @@ class UsuariosResource(Resource):
             'nascimento', type=str, help='Nascimento obrigatório', required=True)
 
     def get(self):
+        usuario = Usuario()
         return (usuarios, 200)
 
     def post(self):
