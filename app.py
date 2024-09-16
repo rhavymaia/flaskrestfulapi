@@ -1,21 +1,20 @@
 from flask import Flask
-from flask_restful import Api
 
-from resources.IndexResource import IndexResource
-from resources.UsuariosResource import UsuariosResource, UsuarioResource
+from helpers.cors import cors
+from helpers.api import api, blueprint
+from helpers.database import db, migrate
 
-# Cors
-# Blueprint
-# Marshal
-# Database
 
 app = Flask(__name__)
-api = Api(app)
 
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://usr:pwd@localhost:5434/projeto20241"
+db.init_app(app)
+migrate.init_app(app, db)
 
-api.add_resource(IndexResource, '/')
-api.add_resource(UsuariosResource, '/usuarios')
-api.add_resource(UsuarioResource, '/usuarios/<string:usuario_id>')
+api.init_app(app)
+cors.init_app(app)
+app.register_blueprint(blueprint)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

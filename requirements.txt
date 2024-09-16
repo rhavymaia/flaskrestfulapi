@@ -1,1 +1,5 @@
-Flask-RESTful==0.3.10 
+Flask-RESTful==0.3.10
+Flask-Cors==5.0.0
+Flask-SQLAlchemy==3.1.1
+Flask-Migrate==4.0.7
+psycopg2-binary==2.9.9
